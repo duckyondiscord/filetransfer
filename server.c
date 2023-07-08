@@ -66,17 +66,17 @@ int main(int argc, char* argv[]) {
     }
 
     fseek(file, 0L, SEEK_END);
-    long file_size = ftell(file);
+    long fileSize = ftell(file);
     fseek(file, 0L, SEEK_SET);
 
-    source = malloc(file_size);
+    source = malloc(fileSize);
     if (source == NULL) {
         printf("Error allocating memory for file...\n");
         exit(EXIT_FAILURE);
     }
 
-    size_t num_bytes_read = fread(source, sizeof(char), file_size, file);
-    if (num_bytes_read != file_size) {
+    size_t numBytesRead = fread(source, sizeof(char), fileSize, file);
+    if (numBytesRead != fileSize) {
         printf("Error reading file into memory...\n");
         exit(EXIT_FAILURE);
     }
@@ -94,7 +94,7 @@ int main(int argc, char* argv[]) {
         inet_ntop(AF_INET, &(client_addr.sin_addr), client_ip, INET_ADDRSTRLEN);
 
         char* sendbuf = source;
-        size_t remaining_bytes = file_size;
+        size_t remaining_bytes = fileSize;
 
         while (remaining_bytes > 0) {
             size_t chunk_size = (remaining_bytes < CHUNK_SIZE) ? remaining_bytes : CHUNK_SIZE;

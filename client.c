@@ -54,16 +54,16 @@ int main(int argc, char* argv[]) {
     char buffer[BUFFER_SIZE];
     ssize_t numBytesReceived;
     size_t totalBytesReceived = 0;
-    size_t megabytesreceived = 0;
-    size_t bytesreceivedsofar = 0;
+    size_t megaBytesReceived = 0;
+    size_t bytesReceivedSoFar = 0;
 
 
     while ((numBytesReceived = recv(client_socket, buffer, BUFFER_SIZE, 0)) > 0) {
         fwrite(buffer, sizeof(char), numBytesReceived, file);
         totalBytesReceived += numBytesReceived;
-        bytesreceivedsofar += numBytesReceived;
-        megabytesreceived = bytesreceivedsofar / 1000000;
-        printf("Received %ld megabytes so far", megabytesreceived);
+        bytesReceivedSoFar += numBytesReceived;
+        megaBytesReceived = bytesReceivedSoFar / 1000000;
+        printf("Received %ld megabytes so far", megaBytesReceived);
         printf("\r");
     }
 
