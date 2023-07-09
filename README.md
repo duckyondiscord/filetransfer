@@ -1,4 +1,4 @@
-# led-server
+# filetransfer
 Simple network file transfer server and client based on my [led-client](https://github.com/duckyondiscord/led-client) code.
 
 # Compiling
