@@ -34,7 +34,7 @@ int main(int argc, char* argv[]) {
     }
 
     if (argc < 3) {
-        printf("Usage:\nserver <port> <filename>");
+        printf("Usage:\n%s <port> <filename>", argv[0]);
         exit(EXIT_FAILURE);
     }
 
