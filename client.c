@@ -54,7 +54,6 @@ int main(int argc, char* argv[]) {
     char buffer[BUFFER_SIZE];
     ssize_t numBytesReceived;
     size_t totalBytesReceived = 0;
-    size_t megaBytesReceived = 0;
     size_t bytesReceivedSoFar = 0;
 
 
@@ -62,8 +61,7 @@ int main(int argc, char* argv[]) {
         fwrite(buffer, sizeof(char), numBytesReceived, file);
         totalBytesReceived += numBytesReceived;
         bytesReceivedSoFar += numBytesReceived;
-        megaBytesReceived = bytesReceivedSoFar / 1000000;
-        printf("Received %ld megabytes so far", megaBytesReceived);
+        printf("Received %ld megabytes so far", bytesReceivedSoFar / 1000000);
         printf("\r");
     }
 
