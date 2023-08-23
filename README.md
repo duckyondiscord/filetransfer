@@ -1,5 +1,5 @@
 # filetransfer
-Simple network file transfer server and client based on my [led-client](https://github.com/duckyondiscord/led-client) code.
+Simple network file transfer server and client based on my [led client and server](https://github.com/duckyondiscord/led-server) code.
 
 # Compiling
 Simply compile them as follows: `gcc server.c -o server && gcc client.c -o client`.
