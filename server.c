@@ -49,7 +49,7 @@ int main(int argc, char* argv[]) {
         printf("Could not bind to address/port\n");
         exit(EXIT_FAILURE);
     }
-    // Now server is ready to listen and verification
+    // Now server is ready to listen
 
     // Register signal handler for SIGINT
     signal(SIGINT, handle_sigint);
