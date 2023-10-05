@@ -1,9 +1,9 @@
 #include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
 #include <unistd.h>
+#include <netinet/in.h>
+#include <stdlib.h>
+#include <sys/socket.h>
 #include <arpa/inet.h>
-#include <stdint.h>
 
 #define SERVER_IP argv[1] // Replace with server IP
 #define SERVER_PORT argv[2] // Replace with server port
