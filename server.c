@@ -17,7 +17,6 @@ char* source = NULL;
 void handle_sigint(int sig) {
     printf("SIGINT received, terminating gracefully.");
     close(sockfd);
-    close(client_sock);
     fclose(file);
     free(source);
     exit(0);
