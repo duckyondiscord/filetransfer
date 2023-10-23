@@ -101,7 +101,7 @@ int main(int argc, char* argv[]) {
             ssize_t bytes_sent = send(client_sock, sendbuf, chunk_size, 0);
             if (bytes_sent == -1) {
                 printf("Error sending file chunk...\n");
-                exit(EXIT_FAILURE);
+                break;
             }
 
             sendbuf += bytes_sent;
