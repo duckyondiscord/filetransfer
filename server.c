@@ -25,17 +25,17 @@ void handle_sigint(int sig) {
 int main(int argc, char* argv[]) {
     struct sockaddr_in servaddr = {};
 
+    if (argc < 3) {
+        printf("Usage:\n%s <port> <filename>\n", argv[0]);
+        exit(EXIT_FAILURE);
+    }
+    
     setbuf(stdout, NULL);
     // socket create and verification
     sockfd = socket(AF_INET, SOCK_STREAM, 0);
     if (sockfd == -1) {
         printf("socket creation failed...\n");
         exit(0);
-    }
-
-    if (argc < 3) {
-        printf("Usage:\n%s <port> <filename>\n", argv[0]);
-        exit(EXIT_FAILURE);
     }
 
     int port = atoi(argv[1]);
