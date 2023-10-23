@@ -17,6 +17,7 @@ char* source = NULL;
 void handle_sigint(int sig) {
     printf("SIGINT received, terminating gracefully.");
     close(sockfd);
+    close(client_sock);
     fclose(file);
     free(source);
     exit(0);
@@ -47,6 +48,7 @@ int main(int argc, char* argv[]) {
     // Binding newly created socket to given IP and port
     if (bind(sockfd, (SA*)&servaddr, sizeof(servaddr)) != 0) {
         printf("Could not bind to address/port\n");
+        close(sockfd);
         exit(EXIT_FAILURE);
     }
     // Now server is ready to listen
@@ -62,6 +64,7 @@ int main(int argc, char* argv[]) {
 
     if (file == NULL) {
         perror("Failed to open file");
+        close(sockfd);
         exit(EXIT_FAILURE);
     }
 
@@ -72,12 +75,17 @@ int main(int argc, char* argv[]) {
     source = malloc(fileSize);
     if (source == NULL) {
         printf("Error allocating memory for file...\n");
+        close(sockfd);
+        fclose(file);
         exit(EXIT_FAILURE);
     }
 
     size_t numBytesRead = fread(source, sizeof(char), fileSize, file);
     if (numBytesRead != fileSize) {
         printf("Error reading file into memory...\n");
+        close(sockfd);
+        fclose(file);
+        free(source);
         exit(EXIT_FAILURE);
     }
 
