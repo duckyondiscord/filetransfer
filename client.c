@@ -13,7 +13,7 @@ int main(int argc, char* argv[]) {
 
     setbuf(stdout, NULL);
     if(argc < 4) {
-        printf("Usage:\n%s <server IP> <server port> <output file name or path>", argv[0]);
+        printf("Usage:\n%s <server IP> <server port> <output file name or path>\n", argv[0]);
         return 1;
     }
 
