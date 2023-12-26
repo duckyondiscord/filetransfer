@@ -7,7 +7,7 @@
 
 #define SERVER_IP argv[1] // Replace with server IP
 #define SERVER_PORT argv[2] // Replace with server port
-#define BUFFER_SIZE 1024
+#define BUFFER_SIZE 1024 // Size of the chunks we will split the file up into
 
 int main(int argc, char* argv[]) {
 
@@ -15,18 +15,20 @@ int main(int argc, char* argv[]) {
     if(argc < 4) {
         printf("Usage:\n%s <server IP> <server port> <output file name or path>\n", argv[0]);
         return 1;
-    }
+    } // If there's less than 4 arguments, we print the usage text.
 
+    // Define the variable that will be used for the client socket
     int client_socket;
     struct sockaddr_in server_address;
 
-    // Create a socket
+    // Create the client socket
     client_socket = socket(AF_INET, SOCK_STREAM, 0);
     if (client_socket == -1) {
         perror("Socket creation failed");
         exit(EXIT_FAILURE);
     }
 
+    // Convert the port argument into an integer
     int port = atoi(SERVER_PORT);
 
     // Set up server address
@@ -43,6 +45,8 @@ int main(int argc, char* argv[]) {
         exit(EXIT_FAILURE);
     }
 
+    
+    // Open the file
     FILE* file;
     file = fopen(argv[3], "w");
     if (file == NULL) {
@@ -50,13 +54,14 @@ int main(int argc, char* argv[]) {
         exit(EXIT_FAILURE);
     }
 
-    // Receive file from the server
+    // Receive the file from the server
     char buffer[BUFFER_SIZE];
     ssize_t numBytesReceived;
     size_t totalBytesReceived = 0;
     size_t bytesReceivedSoFar = 0;
 
 
+    // Keep receiving shit until we reach the amount of bytes we need to receive, constantly printing the progress
     while ((numBytesReceived = recv(client_socket, buffer, BUFFER_SIZE, 0)) > 0) {
         fwrite(buffer, sizeof(char), numBytesReceived, file);
         totalBytesReceived += numBytesReceived;
